@@ -147,9 +147,8 @@
                             <span>目標レベル（難易度）</span>
                         </label>
                         <select id="settingLevel" onchange="onSettingChange()" class="w-full bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-step-blue focus:outline-none">
-                            <option value="高校基礎・英検準2級">高校基礎・英検準2級レベル</option>
-                            <option value="高校標準・英検2級" selected>高校標準・英検2級レベル (共通テスト・中堅大)</option>
-                            <option value="国公立標準・英検準1級">国公立標準・英検準1級レベル</option>
+                            <option value="国公立標準・英検2級レベル" selected>国公立標準・英検2級レベル (共通テスト・中堅大)</option>
+                            <option value="難関国公立・英検準1級レベル">難関国公立・英検準1級レベル</option>
                         </select>
                     </div>
                     <div>
@@ -181,7 +180,7 @@
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center space-x-2">
                             <span id="badgeCategory" class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm">学校生活・教育</span>
-                            <span id="badgeLevel" class="bg-step-yellow text-slate-900 text-xs px-3 py-1 rounded-full font-extrabold">高校標準・英検2級</span>
+                            <span id="badgeLevel" class="bg-step-yellow text-slate-900 text-xs px-3 py-1 rounded-full font-extrabold">国公立標準・英検2級レベル</span>
                         </div>
                         <button onclick="speakJapaneseText()" title="日本語音声を再生" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
                             <i data-lucide="volume-2" class="w-4 h-4"></i>
@@ -421,35 +420,35 @@
             isRecording: false
         };
 
-        // Static fallback bank (Adjusted to Eiken Grade 2 and High School standard level)
+        // Static fallback bank
         const fallbackQuestions = [
             { 
                 id: 'f1', 
-                level: '高校標準・英検2級', 
+                level: '国公立標準・英検2級レベル', 
                 category: '学校生活・教育', 
                 japanese: '外国語を学ぶ最良の方法の一つは、毎日少しずつ英語で日記を書くことだと言われている。', 
                 hint: 'one of the best ways to... / learn a foreign language / keep a diary in English / little by little every day' 
             },
             { 
                 id: 'f2', 
-                level: '高校基礎・英検準2級', 
+                level: '国公立標準・英検2級レベル', 
                 category: '日常生活・健康', 
                 japanese: '健康を維持するためには、十分な睡眠をとり、バランスの取れた食事をすることが大切です。', 
                 hint: 'in order to stay healthy / it is important to / get enough sleep / eat a well-balanced diet' 
             },
             { 
                 id: 'f3', 
-                level: '高校標準・英検2級', 
+                level: '難関国公立・英検準1級レベル', 
                 category: '環境・自然', 
-                japanese: 'プラスチックごみを減らすために、買い物に行くときはマイバッグを持参する人が増えている。', 
-                hint: 'to reduce plastic waste / more and more people are... / bring their own bags / when going shopping' 
+                japanese: '地球温暖化の進行を食い止めるためには、私たち一人一人が日常生活でのエネルギー消費を見直す必要がある。', 
+                hint: 'to halt the progression of global warming / each and every one of us needs to... / reconsider our energy consumption / in our daily lives' 
             },
             { 
                 id: 'f4', 
-                level: '高校標準・英検2級', 
+                level: '難関国公立・英検準1級レベル', 
                 category: '科学・テクノロジー', 
-                japanese: 'スマートフォンのおかげで、私たちはいつでもどこでも世界中の友達と連絡を取ることができる。', 
-                hint: 'thanks to smartphones / keep in touch with friends / all over the world / anytime and anywhere' 
+                japanese: '人工知能が急速に発展する現代において、人間にしかできない創造的な仕事の価値がこれまで以上に高まっている。', 
+                hint: 'in modern times where AI develops rapidly / the value of creative work that only humans can do / is increasing more than ever before' 
             }
         ];
 
@@ -593,9 +592,20 @@
                 displayQuestionUI(appState.currentQuestion);
             } catch (error) {
                 console.warn('API call failed, using fallback question:', error);
-                const filtered = fallbackQuestions.filter(q => q.level === level) || fallbackQuestions;
-                const randomQ = (filtered.length > 0 ? filtered : fallbackQuestions)[Math.floor(Math.random() * (filtered.length || fallbackQuestions.length))];
-                appState.currentQuestion = { ...randomQ, id: Date.now().toString() };
+                
+                // フォールバック時も、選択中のレベルとカテゴリ情報を維持させる
+                let filtered = fallbackQuestions.filter(q => q.level === level);
+                if (filtered.length === 0) filtered = fallbackQuestions; // 該当なしの場合は全体から
+                
+                const randomQ = filtered[Math.floor(Math.random() * filtered.length)];
+                
+                appState.currentQuestion = {
+                    id: Date.now().toString(),
+                    level: level,         // ユーザーの選択を強制的に適用
+                    category: category,   // ユーザーの選択を強制的に適用
+                    japanese: randomQ.japanese,
+                    hint: randomQ.hint
+                };
                 displayQuestionUI(appState.currentQuestion);
             } finally {
                 hideLoading();
