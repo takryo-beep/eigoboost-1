@@ -53,8 +53,8 @@
                 <span>高校・大学入試対策 | AI和文英訳・基礎英作文デイリートレーニング</span>
             </div>
             <div class="hidden md:flex items-center space-x-4 text-slate-300 text-[11px]">
-                <span>入試頻出テーマ対応</span>
-                <span class="text-step-yellow font-bold">1日3問集中演習</span>
+                <span>固定120問・2レベル</span>
+                <span class="text-step-yellow font-bold">12時間に1問の集中演習</span>
             </div>
         </div>
     </div>
@@ -82,8 +82,8 @@
                 <!-- Daily Attempt Counter Badge -->
                 <div class="flex items-center space-x-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-amber-900">
                     <i data-lucide="calendar" class="w-4 h-4 text-amber-600"></i>
-                    <span class="text-slate-500 hidden sm:inline">本日の演習:</span>
-                    <span class="font-extrabold text-amber-800 text-sm" id="statDailyCount">0 / 3</span>
+                    <span class="text-slate-500 hidden sm:inline">今回の演習:</span>
+                    <span class="font-extrabold text-amber-800 text-sm" id="statDailyCount">0 / 1</span>
                     <span class="text-[10px] text-slate-500">問</span>
                 </div>
 
@@ -133,41 +133,27 @@
                     <i data-lucide="lock" class="w-5 h-5"></i>
                 </div>
                 <div class="flex-1 text-xs sm:text-sm">
-                    <p class="font-extrabold text-amber-900 text-sm sm:text-base">本日の演習上限（3問）に達しました！</p>
-                    <p class="text-amber-800 mt-0.5 font-medium leading-relaxed">今日の学習は完了です。明日になると再び3問解けるようになります。「復習ノート」や「重要表現ノート」で振り返りを行いましょう。</p>
+                    <p class="font-extrabold text-amber-900 text-sm sm:text-base">今回の1問を完了しました</p>
+                    <p class="text-amber-800 mt-0.5 font-medium leading-relaxed">採点に成功してから12時間後に、次の1問に挑戦できます。待機中は復習ノートを活用しましょう。</p>
                 </div>
             </div>
 
             <!-- Settings Control Bar -->
             <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-auto">
+                <div class="w-full md:w-auto">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 mb-1 flex items-center space-x-1">
                             <span class="w-2 h-2 rounded-full bg-step-blue inline-block"></span>
                             <span>目標レベル（難易度）</span>
                         </label>
                         <select id="settingLevel" onchange="onSettingChange()" class="w-full bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-step-blue focus:outline-none">
-                            <option value="国公立標準・英検2級レベル" selected>国公立標準・英検2級レベル (共通テスト・中堅大)</option>
-                            <option value="難関国公立・英検準1級レベル">難関国公立・英検準1級レベル</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 mb-1 flex items-center space-x-1">
-                            <span class="w-2 h-2 rounded-full bg-step-orange inline-block"></span>
-                            <span>頻出テーマ</span>
-                        </label>
-                        <select id="settingCategory" onchange="onSettingChange()" class="w-full bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-step-blue focus:outline-none">
-                            <option value="学校生活・教育" selected>1. 学校生活・教育 (部活動・勉強・将来の進路)</option>
-                            <option value="日常生活・健康">2. 日常生活・健康 (食習慣・睡眠・ストレス解消)</option>
-                            <option value="環境・自然">3. 環境・自然 (リサイクル・地球温暖化・自然保護)</option>
-                            <option value="科学・テクノロジー">4. 科学・テクノロジー (インターネット・スマホ・AIの利用)</option>
-                            <option value="文化・国際交流">5. 文化・国際交流 (海外旅行・異文化理解・言語学習)</option>
-                            <option value="社会・コミュニティ">6. 社会・コミュニティ (ボランティア・地域の支え合い)</option>
+                            <option value="standard" selected>標準（英検2級・中堅大）</option>
+                            <option value="advanced">発展（英検準1級・難関大）</option>
                         </select>
                     </div>
                 </div>
 
-                <button onclick="generateNewQuestion()" id="btnNewQuestion" class="w-full md:w-auto bg-step-blue hover:bg-step-darkblue active:scale-[0.98] text-white px-5 py-3 rounded-xl font-extrabold text-sm flex items-center justify-center space-x-2 transition shadow-sm">
+                <button onclick="generateNewQuestion(true)" id="btnNewQuestion" class="w-full md:w-auto bg-step-blue hover:bg-step-darkblue active:scale-[0.98] text-white px-5 py-3 rounded-xl font-extrabold text-sm flex items-center justify-center space-x-2 transition shadow-sm">
                     <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                     <span>別のお題に変更</span>
                 </button>
@@ -178,9 +164,9 @@
                 <!-- Hero Header -->
                 <div class="bg-gradient-to-r from-step-darkblue via-step-blue to-indigo-900 text-white p-5 sm:p-7 relative">
                     <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center space-x-2">
-                            <span id="badgeCategory" class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm">学校生活・教育</span>
-                            <span id="badgeLevel" class="bg-step-yellow text-slate-900 text-xs px-3 py-1 rounded-full font-extrabold">国公立標準・英検2級レベル</span>
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+                            <span id="questionProgress" class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm">各レベル60問・計120問</span>
+                            <span id="badgeLevel" class="bg-step-yellow text-slate-900 text-xs px-3 py-1 rounded-full font-extrabold">標準（英検2級・中堅大）</span>
                         </div>
                         <button onclick="speakJapaneseText()" title="日本語音声を再生" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
                             <i data-lucide="volume-2" class="w-4 h-4"></i>
@@ -189,7 +175,7 @@
 
                     <p class="text-xs text-blue-200 uppercase tracking-wider mb-1 font-bold">課題和文（これを英訳してください）</p>
                     <h2 id="japanesePrompt" class="text-lg sm:text-2xl font-black leading-relaxed tracking-wide min-h-[4rem] flex items-center">
-                        問題を作成中...
+                        問題集を読み込み中...
                     </h2>
 
                     <!-- Hint Drawer -->
@@ -228,7 +214,7 @@
                                 <i data-lucide="mic" class="w-4 h-4 text-step-blue"></i>
                                 <span id="speechBtnText">音声入力</span>
                             </button>
-                            <span id="dailyAttemptsNotice" class="text-xs font-bold text-slate-500">本日あと <span id="remainingCount" class="text-step-blue font-extrabold">3</span> 問</span>
+                            <span id="dailyAttemptsNotice" class="text-xs font-bold text-slate-500">今回あと <span id="remainingCount" class="text-step-blue font-extrabold">1</span> 問</span>
                         </div>
 
                         <button onclick="submitTranslation()" id="btnSubmit" class="w-full sm:w-auto min-w-[220px] bg-gradient-to-r from-amber-500 to-step-orange hover:from-amber-600 hover:to-orange-600 active:scale-[0.98] text-white px-7 py-3.5 rounded-xl font-black text-base flex items-center justify-center space-x-2 transition-all step-btn-shadow disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none">
@@ -294,7 +280,7 @@
                 <div id="keyVocabCard" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
                     <h3 class="text-base font-black text-step-darkblue flex items-center space-x-2">
                         <i data-lucide="book-open" class="w-5 h-5 text-step-orange"></i>
-                        <span>テーマ別・覚えておきたい重要表現</span>
+                        <span>覚えておきたい重要表現</span>
                     </h3>
 
                     <div id="keyVocabList" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -304,7 +290,7 @@
 
                 <!-- Next Question CTA -->
                 <div class="flex justify-center pt-2">
-                    <button onclick="generateNewQuestion()" id="btnNextQuestion" class="bg-step-blue hover:bg-step-darkblue active:scale-[0.98] text-white px-8 py-4 rounded-xl font-black text-base flex items-center space-x-2 transition shadow-lg">
+                    <button onclick="generateNewQuestion(true)" id="btnNextQuestion" class="bg-step-blue hover:bg-step-darkblue active:scale-[0.98] text-white px-8 py-4 rounded-xl font-black text-base flex items-center space-x-2 transition shadow-lg">
                         <span>次の問題に挑戦する</span>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
@@ -401,11 +387,15 @@
         </div>
     </footer>
 
+    <script src="questions.js?v=120-20261103"></script>
     <script>
         /* ==========================================================================
            1. Application State & Storage
            ========================================================================== */
-        const MAX_DAILY_ATTEMPTS = 3;
+        const MAX_DAILY_ATTEMPTS = 1;
+        const COOLDOWN_MS = 12 * 60 * 60 * 1000;
+        let isSubmitting = false;
+        let isGenerating = false;
 
         let appState = {
             currentTab: 'practice',
@@ -420,42 +410,20 @@
             isRecording: false
         };
 
-        // Static fallback bank
-        const fallbackQuestions = [
-            { 
-                id: 'f1', 
-                level: '国公立標準・英検2級レベル', 
-                category: '学校生活・教育', 
-                japanese: '外国語を学ぶ最良の方法の一つは、毎日少しずつ英語で日記を書くことだと言われている。', 
-                hint: 'one of the best ways to... / learn a foreign language / keep a diary in English / little by little every day' 
-            },
-            { 
-                id: 'f2', 
-                level: '国公立標準・英検2級レベル', 
-                category: '日常生活・健康', 
-                japanese: '健康を維持するためには、十分な睡眠をとり、バランスの取れた食事をすることが大切です。', 
-                hint: 'in order to stay healthy / it is important to / get enough sleep / eat a well-balanced diet' 
-            },
-            { 
-                id: 'f3', 
-                level: '難関国公立・英検準1級レベル', 
-                category: '環境・自然', 
-                japanese: '地球温暖化の進行を食い止めるためには、私たち一人一人が日常生活でのエネルギー消費を見直す必要がある。', 
-                hint: 'to halt the progression of global warming / each and every one of us needs to... / reconsider our energy consumption / in our daily lives' 
-            },
-            { 
-                id: 'f4', 
-                level: '難関国公立・英検準1級レベル', 
-                category: '科学・テクノロジー', 
-                japanese: '人工知能が急速に発展する現代において、人間にしかできない創造的な仕事の価値がこれまで以上に高まっている。', 
-                hint: 'in modern times where AI develops rapidly / the value of creative work that only humans can do / is increasing more than ever before' 
-            }
-        ];
+        // 120問の固定問題集は questions.js から読み込みます。
 
         /* ==========================================================================
            2. Initialization & Lifecycle
            ========================================================================== */
         window.onload = function() {
+            if (typeof EIGOBOOST_QUESTIONS === 'undefined') {
+                document.getElementById('japanesePrompt').innerText = '問題集を読み込めません。questions.js の配置を確認して再読み込みしてください。';
+                document.getElementById('btnSubmit').disabled = true;
+                return;
+            }
+            const savedLevel = readSaved('eigoboost_selected_level');
+            const pendingLevel = readSaved('eigoboost_12h_question')?.question?.level;
+            document.getElementById('settingLevel').value = Object.hasOwn(EIGOBOOST_LEVELS, savedLevel) ? savedLevel : (Object.hasOwn(EIGOBOOST_LEVELS, pendingLevel) ? pendingLevel : 'standard');
             lucide.createIcons();
             loadDailyAttempts();
             updateStatsUI();
@@ -471,16 +439,30 @@
                 }
             });
 
-            // Initial question fetch
+            document.getElementById('userTranslation').addEventListener('input', saveQuestionDraft);
+            window.addEventListener('storage', event => {
+                if (event.key === 'eigoboost_12h_attempt') {
+                    loadDailyAttempts();
+                    if (!isSubmitting && !isGenerating && remainingCooldown() > 0) generateNewQuestion();
+                }
+            });
+            setInterval(() => {
+                const wasLocked = appState.dailyAttempts > 0;
+                loadDailyAttempts();
+                if (wasLocked && appState.dailyAttempts === 0 && !isSubmitting && !isGenerating) generateNewQuestion();
+            }, 1000);
             generateNewQuestion();
         };
 
         function onSettingChange() {
-            generateNewQuestion();
+            if (isSubmitting || isGenerating || remainingCooldown() > 0) return;
+            saveQuestionDraft();
+            localStorage.setItem('eigoboost_selected_level', JSON.stringify(document.getElementById('settingLevel').value));
+            generateNewQuestion(true);
         }
 
         /* ==========================================================================
-           3. Daily Attempts Tracking (Max 3 questions / day)
+           3. One successful attempt per 12 hours (same browser)
            ========================================================================== */
         function getTodayString() {
             const d = new Date();
@@ -490,66 +472,102 @@
             return `${year}-${month}-${day}`;
         }
 
+        function readSaved(key) {
+            try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
+        }
+
+        function lastAttempt() {
+            const record = readSaved('eigoboost_12h_attempt');
+            return record && Number.isFinite(record.completedAt) ? record : null;
+        }
+
+        function remainingCooldown(now = Date.now()) {
+            const record = lastAttempt();
+            return record ? Math.max(0, record.completedAt + COOLDOWN_MS - now) : 0;
+        }
+
         function loadDailyAttempts() {
-            const today = getTodayString();
-            const storedDate = localStorage.getItem('eigoboost_attempt_date');
-            if (storedDate === today) {
-                appState.dailyAttempts = parseInt(localStorage.getItem('eigoboost_daily_attempts') || '0', 10);
-            } else {
-                appState.dailyAttempts = 0;
-                localStorage.setItem('eigoboost_attempt_date', today);
-                localStorage.setItem('eigoboost_daily_attempts', '0');
-            }
+            appState.dailyAttempts = remainingCooldown() > 0 ? 1 : 0;
             updateDailyAttemptUI();
         }
 
-        function incrementDailyAttempt() {
-            appState.dailyAttempts += 1;
-            const today = getTodayString();
-            localStorage.setItem('eigoboost_attempt_date', today);
-            localStorage.setItem('eigoboost_daily_attempts', appState.dailyAttempts.toString());
+        function incrementDailyAttempt(result, answer, question) {
+            rememberPresentedQuestion(question);
+            localStorage.setItem('eigoboost_12h_attempt', JSON.stringify({ completedAt: Date.now(), result, answer, question }));
+            localStorage.removeItem('eigoboost_12h_question');
+            appState.dailyAttempts = 1;
             updateDailyAttemptUI();
         }
 
         function updateDailyAttemptUI() {
-            const count = appState.dailyAttempts;
-            const remaining = Math.max(0, MAX_DAILY_ATTEMPTS - count);
-
-            // Stat in header
-            document.getElementById('statDailyCount').innerText = `${count} / ${MAX_DAILY_ATTEMPTS}`;
-
-            // Remaining text in input area
-            const remainingEl = document.getElementById('remainingCount');
-            if (remainingEl) remainingEl.innerText = remaining;
-
-            const submitBtn = document.getElementById('btnSubmit');
-            const textarea = document.getElementById('userTranslation');
-            const limitBanner = document.getElementById('dailyLimitBanner');
-            const speechBtn = document.getElementById('btnSpeech');
-
-            if (count >= MAX_DAILY_ATTEMPTS) {
-                if (limitBanner) limitBanner.classList.remove('hidden');
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    document.getElementById('submitBtnText').innerText = '本日の上限に達しました';
-                }
-                if (textarea) {
-                    textarea.disabled = true;
-                    textarea.placeholder = '本日の演習枠（3問）を完了しました。明日また挑戦しましょう！';
-                }
-                if (speechBtn) speechBtn.disabled = true;
-            } else {
-                if (limitBanner) limitBanner.classList.add('hidden');
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    document.getElementById('submitBtnText').innerText = 'AI精密添削を受ける';
-                }
-                if (textarea) {
-                    textarea.disabled = false;
-                    textarea.placeholder = '英語の文章（答案）を入力してください...';
-                }
-                if (speechBtn) speechBtn.disabled = false;
+            const remaining = remainingCooldown();
+            const locked = remaining > 0;
+            appState.dailyAttempts = locked ? 1 : 0;
+            document.getElementById('statDailyCount').innerText = (locked ? 1 : 0) + ' / 1';
+            document.getElementById('remainingCount').innerText = locked ? '0' : '1';
+            const banner = document.getElementById('dailyLimitBanner');
+            banner.classList.toggle('hidden', !locked);
+            if (locked) {
+                const minutes = Math.ceil(remaining / 60000);
+                const next = new Date(lastAttempt().completedAt + COOLDOWN_MS).toLocaleString('ja-JP');
+                banner.querySelector('p:last-child').innerText = '次回は ' + next + ' から（あと' + Math.floor(minutes / 60) + '時間' + (minutes % 60) + '分）。復習ノートは引き続き利用できます。';
             }
+            document.getElementById('btnSubmit').disabled = locked || isSubmitting || isGenerating;
+            document.getElementById('submitBtnText').innerText = locked ? '12時間後に再挑戦できます' : 'AI精密添削を受ける';
+            document.getElementById('userTranslation').disabled = locked || isSubmitting;
+            document.getElementById('btnSpeech').disabled = locked || isSubmitting;
+            document.getElementById('settingLevel').disabled = locked || isSubmitting || isGenerating;
+            for (const id of ['btnNewQuestion', 'btnNextQuestion']) document.getElementById(id).disabled = locked || isSubmitting || isGenerating;
+            document.getElementById('userTranslation').placeholder = locked ? '今回の演習は完了しました。次回まで復習しましょう。' : '英語の文章（答案）を入力してください...';
+        }
+
+        function saveQuestionDraft() {
+            if (!appState.currentQuestion || remainingCooldown() > 0) return;
+            const answer = document.getElementById('userTranslation').value;
+            localStorage.setItem('eigoboost_12h_question', JSON.stringify({ question: appState.currentQuestion, answer }));
+            const saved = readSaved('eigoboost_question_drafts');
+            const drafts = saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
+            drafts[appState.currentQuestion.id] = answer;
+            localStorage.setItem('eigoboost_question_drafts', JSON.stringify(drafts));
+        }
+
+        function levelLabel(level) {
+            return EIGOBOOST_LEVELS[level] || level || '標準';
+        }
+
+        function questionCycle(level) {
+            const ids = new Set(EIGOBOOST_QUESTIONS.filter(q => q.level === level).map(q => q.id));
+            const saved = readSaved('eigoboost_question_cycle:' + level);
+            const oldIds = appState.history.map(item => item.question?.id);
+            const seen = saved && Array.isArray(saved.seen) ? saved.seen : oldIds;
+            const lastId = saved?.lastId || lastAttempt()?.question?.id || '';
+            return { seen: [...new Set(seen.filter(id => ids.has(id)))], lastId };
+        }
+
+        function rememberPresentedQuestion(question) {
+            if (!EIGOBOOST_QUESTIONS.some(q => q.id === question.id)) return;
+            const state = questionCycle(question.level);
+            if (!state.seen.includes(question.id)) state.seen.push(question.id);
+            state.lastId = question.id;
+            localStorage.setItem('eigoboost_question_cycle:' + question.level, JSON.stringify(state));
+        }
+
+        function pickUnseenQuestion(level) {
+            const pool = EIGOBOOST_QUESTIONS.filter(q => q.level === level);
+            if (!pool.length) throw new Error('このレベルの問題がありません。');
+            const state = questionCycle(level);
+            let unseen = pool.filter(q => !state.seen.includes(q.id));
+            if (!unseen.length) {
+                state.seen = [];
+                unseen = pool;
+            }
+            // 一巡の境目でも、直前と同じ問題を続けて選ばない。
+            const choices = unseen.length > 1 ? unseen.filter(q => q.id !== state.lastId) : unseen;
+            const question = choices[Math.floor(Math.random() * choices.length)];
+            state.seen.push(question.id);
+            state.lastId = question.id;
+            localStorage.setItem('eigoboost_question_cycle:' + level, JSON.stringify(state));
+            return question;
         }
 
         /* ==========================================================================
@@ -570,52 +588,69 @@
             return await res.json();
         }
 
-        // Generate Question
-        async function generateNewQuestion() {
-            const level = document.getElementById('settingLevel').value;
-            const category = document.getElementById('settingCategory').value;
-
-            showLoading('入試問題を出題中...');
-            hideFeedbackUI();
-
+        // 固定問題集から出題。Geminiは採点時だけ呼び出す。
+        async function generateNewQuestion(forceNew = false) {
+            if (isGenerating || isSubmitting) return;
+            isGenerating = true;
+            updateDailyAttemptUI();
             try {
-                const result = await callServerApi('generate', { level, category });
-
-                appState.currentQuestion = {
-                    id: Date.now().toString(),
-                    level: level,
-                    category: category,
-                    japanese: result.japanese,
-                    hint: result.hint
-                };
-
-                displayQuestionUI(appState.currentQuestion);
+                if (navigator.locks) return await navigator.locks.request('eigoboost-question-select', () => presentQuestion(forceNew));
+                return presentQuestion(forceNew);
             } catch (error) {
-                console.warn('API call failed, using fallback question:', error);
-                
-                // フォールバック時も、選択中のレベルとカテゴリ情報を維持させる
-                let filtered = fallbackQuestions.filter(q => q.level === level);
-                if (filtered.length === 0) filtered = fallbackQuestions; // 該当なしの場合は全体から
-                
-                const randomQ = filtered[Math.floor(Math.random() * filtered.length)];
-                
-                appState.currentQuestion = {
-                    id: Date.now().toString(),
-                    level: level,         // ユーザーの選択を強制的に適用
-                    category: category,   // ユーザーの選択を強制的に適用
-                    japanese: randomQ.japanese,
-                    hint: randomQ.hint
-                };
-                displayQuestionUI(appState.currentQuestion);
+                showToast(error.message || '問題を表示できませんでした。', 'alert');
             } finally {
-                hideLoading();
+                isGenerating = false;
+                updateDailyAttemptUI();
             }
+        }
+
+        function presentQuestion(forceNew) {
+            const completed = lastAttempt();
+            if (remainingCooldown() > 0 && completed?.question) {
+                appState.currentQuestion = completed.question;
+                if (Object.hasOwn(EIGOBOOST_LEVELS, completed.question.level)) document.getElementById('settingLevel').value = completed.question.level;
+                displayQuestionUI(completed.question);
+                document.getElementById('userTranslation').value = completed.answer;
+                displayFeedbackUI(completed.answer, completed.result);
+                return;
+            }
+            const level = document.getElementById('settingLevel').value;
+            const saved = readSaved('eigoboost_12h_question');
+            const bankQuestion = EIGOBOOST_QUESTIONS.find(q => q.id === saved?.question?.id);
+            if (!forceNew && bankQuestion?.level === level) {
+                appState.currentQuestion = bankQuestion;
+                rememberPresentedQuestion(bankQuestion);
+                displayQuestionUI(bankQuestion);
+                document.getElementById('userTranslation').value = saved.answer || '';
+                return;
+            }
+            // 旧版の未採点答案は退避し、新しい固定問題集へ移行する。
+            if (saved?.question && !bankQuestion && !readSaved('eigoboost_legacy_question')) localStorage.setItem('eigoboost_legacy_question', JSON.stringify(saved));
+            if (forceNew) saveQuestionDraft();
+            appState.currentQuestion = pickUnseenQuestion(level);
+            hideFeedbackUI();
+            displayQuestionUI(appState.currentQuestion);
+            const drafts = readSaved('eigoboost_question_drafts');
+            document.getElementById('userTranslation').value = drafts?.[appState.currentQuestion.id] || '';
+            saveQuestionDraft();
         }
 
         // Submit Translation
         async function submitTranslation() {
+            if (isSubmitting || isGenerating) return;
+            if (navigator.locks) {
+                return navigator.locks.request('eigoboost-simple-grade', { ifAvailable: true }, async lock => {
+                    if (!lock) { showToast('別のタブで採点中です。完了をお待ちください。', 'info'); return; }
+                    return submitTranslationInternal();
+                });
+            }
+            return submitTranslationInternal();
+        }
+
+        async function submitTranslationInternal() {
+            loadDailyAttempts();
             if (appState.dailyAttempts >= MAX_DAILY_ATTEMPTS) {
-                showToast('本日の演習枠（3問）を達成しました。また明日解きましょう！', 'alert');
+                showToast('今回の1問は完了しました。採点成功から12時間後に再挑戦できます。', 'alert');
                 return;
             }
 
@@ -632,24 +667,27 @@
 
             if (!appState.currentQuestion) return;
 
+            const submittedQuestion = { ...appState.currentQuestion };
+            saveQuestionDraft();
+            isSubmitting = true;
+            updateDailyAttemptUI();
             showLoading('AI精密添削中...');
 
             try {
                 const feedbackResult = await callServerApi('grade', {
-                    japanese: appState.currentQuestion.japanese,
-                    level: appState.currentQuestion.level,
-                    category: appState.currentQuestion.category,
+                    japanese: submittedQuestion.japanese,
+                    level: levelLabel(submittedQuestion.level),
                     userTranslation: userInput
                 });
 
                 // Count towards daily attempt limit
-                incrementDailyAttempt();
+                incrementDailyAttempt(feedbackResult, userInput, submittedQuestion);
 
                 // Save to history
                 saveHistoryItem({
                     id: Date.now().toString(),
                     date: new Date().toLocaleDateString('ja-JP'),
-                    question: appState.currentQuestion,
+                    question: submittedQuestion,
                     userTranslation: userInput,
                     feedback: feedbackResult
                 });
@@ -661,36 +699,20 @@
                 displayFeedbackUI(userInput, feedbackResult);
             } catch (error) {
                 console.error('Grading error:', error);
-                showToast('AI添削でエラーが発生しました。もう一度お試しください', 'alert');
+                showToast(error.message || 'AI添削でエラーが発生しました。答案は保持しています。', 'alert');
             } finally {
+                isSubmitting = false;
+                loadDailyAttempts();
                 hideLoading();
             }
         }
 
         // TTS Audio Synthesis
         async function playTTS(text) {
-            if (!text) return;
-            showToast('模範音声を準備中...', 'info');
-
-            try {
-                const data = await callServerApi('tts', { text });
-                if (data && data.audioData && data.mimeType) {
-                    const sampleRateMatch = data.mimeType.match(/rate=(\d+)/);
-                    const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
-
-                    const pcmData = base64ToArrayBuffer(data.audioData);
-                    const pcm16 = new Int16Array(pcmData);
-                    const wavBlob = pcmToWav(pcm16, sampleRate);
-                    const audioUrl = URL.createObjectURL(wavBlob);
-
-                    const audio = new Audio(audioUrl);
-                    audio.play();
-                    return;
-                }
+            if (text && 'speechSynthesis' in window) {
+                speechSynthesis.cancel();
                 fallbackWebSpeech(text);
-            } catch (err) {
-                fallbackWebSpeech(text);
-            }
+            } else showToast('この端末では読み上げに対応していません。', 'info');
         }
 
         function fallbackWebSpeech(text) {
@@ -801,8 +823,10 @@
            5. UI Renderers & Feedback Display
            ========================================================================== */
         function displayQuestionUI(q) {
-            document.getElementById('badgeCategory').innerText = q.category;
-            document.getElementById('badgeLevel').innerText = q.level;
+            const state = questionCycle(q.level);
+            const total = EIGOBOOST_QUESTIONS.filter(item => item.level === q.level).length;
+            document.getElementById('questionProgress').innerText = total ? 'この周回の出題：' + state.seen.length + ' / ' + total + '問' : '前回の演習';
+            document.getElementById('badgeLevel').innerText = levelLabel(q.level);
             document.getElementById('japanesePrompt').innerText = q.japanese;
             document.getElementById('hintText').innerText = q.hint || 'ヒントなし';
             document.getElementById('userTranslation').value = '';
@@ -860,10 +884,10 @@
             modelList.innerHTML = fb.modelAnswers.map(ans => `
                 <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between group">
                     <div>
-                        <span class="text-[10px] font-black tracking-wider text-step-blue bg-step-lightblue px-2.5 py-0.5 rounded mb-1.5 inline-block">${ans.type}</span>
-                        <p class="text-sm font-bold text-slate-800 leading-relaxed">${ans.text}</p>
+                        <span class="text-[10px] font-black tracking-wider text-step-blue bg-step-lightblue px-2.5 py-0.5 rounded mb-1.5 inline-block">${escapeHtml(ans.type)}</span>
+                        <p class="text-sm font-bold text-slate-800 leading-relaxed">${escapeHtml(ans.text)}</p>
                     </div>
-                    <button onclick="playTTS('${escapeQuotes(ans.text)}')" class="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-step-blue hover:border-step-blue transition shadow-sm ml-2 flex-shrink-0">
+                    <button data-speech="${encodeURIComponent(ans.text)}" onclick="playTTS(decodeURIComponent(this.dataset.speech))" class="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-step-blue hover:border-step-blue transition shadow-sm ml-2 flex-shrink-0">
                         <i data-lucide="volume-2" class="w-4 h-4"></i>
                     </button>
                 </div>
@@ -877,11 +901,11 @@
                 correctionsList.innerHTML = fb.corrections.map(c => `
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
                         <div class="flex items-center space-x-2">
-                            <span class="line-through text-rose-500 font-mono font-bold">${c.original}</span>
+                            <span class="line-through text-rose-500 font-mono font-bold">${escapeHtml(c.original)}</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                            <span class="font-extrabold text-emerald-600 font-mono text-sm">${c.suggestion}</span>
+                            <span class="font-extrabold text-emerald-600 font-mono text-sm">${escapeHtml(c.suggestion)}</span>
                         </div>
-                        <p class="text-slate-600 leading-relaxed font-medium">${c.explanation}</p>
+                        <p class="text-slate-600 leading-relaxed font-medium">${escapeHtml(c.explanation)}</p>
                     </div>
                 `).join('');
             } else {
@@ -898,10 +922,10 @@
                     return `
                     <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start justify-between">
                         <div>
-                            <p class="font-bold text-xs text-slate-900 font-mono">${v.phrase}</p>
-                            <p class="text-[11px] text-slate-600 mt-0.5 font-medium leading-relaxed">${v.meaning}</p>
+                            <p class="font-bold text-xs text-slate-900 font-mono">${escapeHtml(v.phrase)}</p>
+                            <p class="text-[11px] text-slate-600 mt-0.5 font-medium leading-relaxed">${escapeHtml(v.meaning)}</p>
                         </div>
-                        <button onclick="toggleSavePhrase('${escapeQuotes(v.phrase)}', '${escapeQuotes(v.meaning)}')" 
+                        <button data-phrase="${encodeURIComponent(v.phrase)}" data-meaning="${encodeURIComponent(v.meaning)}" onclick="toggleSavePhrase(decodeURIComponent(this.dataset.phrase), decodeURIComponent(this.dataset.meaning))" 
                             class="p-1.5 rounded-lg hover:bg-slate-200 text-slate-500 transition ml-2">
                             <i data-lucide="${isAdded ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4 ${isAdded ? 'text-step-blue fill-step-blue' : ''}"></i>
                         </button>
@@ -971,25 +995,25 @@
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
                     <div class="flex items-center justify-between text-xs text-slate-400">
                         <div class="flex items-center space-x-2">
-                            <span class="bg-step-lightblue text-step-blue font-extrabold px-2.5 py-0.5 rounded">${item.question.category}・${item.question.level}</span>
-                            <span>${item.date}</span>
+                            <span class="bg-step-lightblue text-step-blue font-extrabold px-2.5 py-0.5 rounded">${escapeHtml(levelLabel(item.question.level))}</span>
+                            <span>${escapeHtml(item.date)}</span>
                         </div>
-                        <span class="font-black text-step-blue text-sm">${item.feedback.score}点</span>
+                        <span class="font-black text-step-blue text-sm">${escapeHtml(item.feedback.score)}点</span>
                     </div>
 
                     <div>
                         <p class="text-xs text-slate-400 font-bold">課題和文</p>
-                        <p class="text-sm font-bold text-slate-800">${item.question.japanese}</p>
+                        <p class="text-sm font-bold text-slate-800">${escapeHtml(item.question.japanese)}</p>
                     </div>
 
                     <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
                         <p class="text-xs text-slate-400 font-bold">あなたの提出答案</p>
-                        <p class="text-sm font-mono text-slate-700 font-medium">${item.userTranslation}</p>
+                        <p class="text-sm font-mono text-slate-700 font-medium">${escapeHtml(item.userTranslation)}</p>
                     </div>
 
                     <div class="flex items-center justify-between pt-1">
-                        <p class="text-xs text-slate-600 font-medium truncate max-w-md">${item.feedback.summary}</p>
-                        <button onclick="playTTS('${escapeQuotes(item.feedback.modelAnswers[0]?.text || '')}')" class="text-xs text-step-blue font-bold flex items-center space-x-1 hover:underline">
+                        <p class="text-xs text-slate-600 font-medium truncate max-w-md">${escapeHtml(item.feedback.summary)}</p>
+                        <button data-speech="${encodeURIComponent(item.feedback.modelAnswers[0]?.text || '')}" onclick="playTTS(decodeURIComponent(this.dataset.speech))" class="text-xs text-step-blue font-bold flex items-center space-x-1 hover:underline">
                             <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
                             <span>模範音声を再生</span>
                         </button>
@@ -1038,16 +1062,16 @@
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-3">
                     <div class="space-y-1">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] text-slate-400 font-bold">${item.date}</span>
-                            <button onclick="toggleSavePhrase('${escapeQuotes(item.phrase)}', '')" class="text-slate-400 hover:text-rose-500 transition">
+                            <span class="text-[10px] text-slate-400 font-bold">${escapeHtml(item.date)}</span>
+                            <button data-phrase="${encodeURIComponent(item.phrase)}" onclick="toggleSavePhrase(decodeURIComponent(this.dataset.phrase), '')" class="text-slate-400 hover:text-rose-500 transition">
                                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                             </button>
                         </div>
-                        <p class="font-bold text-base text-slate-800 font-mono">${item.phrase}</p>
-                        <p class="text-xs text-slate-600 font-medium leading-relaxed">${item.meaning}</p>
+                        <p class="font-bold text-base text-slate-800 font-mono">${escapeHtml(item.phrase)}</p>
+                        <p class="text-xs text-slate-600 font-medium leading-relaxed">${escapeHtml(item.meaning)}</p>
                     </div>
 
-                    <button onclick="playTTS('${escapeQuotes(item.phrase)}')" class="self-start text-xs bg-step-lightblue hover:bg-blue-100 text-step-darkblue font-extrabold px-3 py-1.5 rounded-lg flex items-center space-x-1.5 transition">
+                    <button data-speech="${encodeURIComponent(item.phrase)}" onclick="playTTS(decodeURIComponent(this.dataset.speech))" class="self-start text-xs bg-step-lightblue hover:bg-blue-100 text-step-darkblue font-extrabold px-3 py-1.5 rounded-lg flex items-center space-x-1.5 transition">
                         <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
                         <span>発音を確認</span>
                     </button>
@@ -1166,6 +1190,10 @@
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
             }, 3000);
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
         }
 
         function escapeQuotes(str) {
