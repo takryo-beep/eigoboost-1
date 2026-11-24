@@ -1,4 +1,4 @@
-// 固定問題集: 6テーマ × (標準10問 + 発展10問) = 120問。
+// 固定問題集: 11テーマ × (標準10問 + 発展10問) = 220問。
 // テーマは問題集の管理用です。学習画面ではレベルだけを選択します。
 // 各行は [和文, 英訳のヒント]。IDは公開後に変更・再利用しないでください。
 const EIGOBOOST_LEVELS = Object.freeze({
@@ -166,6 +166,141 @@ const EIGOBOOST_GROUPS = [
       ['人口が減る地域の将来を考えるとき、人数を増やすことだけを目標にせず、暮らしの質を保つ視点も必要でしょう。', 'consider the future of areas with declining populations / not focus solely on numbers / maintain quality of life'],
       ['ボランティアに頼る仕組みを持続可能にするには、善意を求め続けるのではなく、負担を分かち合う工夫が欠かせません。', 'make volunteer-based systems sustainable / rather than rely indefinitely on goodwill / share the burden'],
       ['社会への信頼は、誰もが常に正しい判断をするという期待よりも、誤りを認めて修正できる仕組みに支えられています。', 'trust in society / rest less on expectations of infallibility than on / acknowledge and correct mistakes']
+    ]
+  },
+  {
+    id: "study_methods", theme: "学習法・進路",
+    standard: [
+      ["去年受けた試験の答案を読み返して、同じ種類の間違いを繰り返していたことに気づきました。", "look over an old exam paper / realize that / make the same kind of mistake"],
+      ["辞書を引く前に、前後の文からその単語の意味を推測してみましょう。", "before looking up a word / guess its meaning from the surrounding sentences"],
+      ["先生に勧められた本は、思っていたほど難しくありませんでした。", "the book my teacher recommended / not as difficult as I had expected"],
+      ["来週までに発表の資料を仕上げるため、私たちは仕事を三つに分けました。", "finish preparing the materials by next week / divide the work into three parts"],
+      ["初めてその大学を訪れたとき、学生が自由に使える部屋の多さに驚きました。", "when I first visited / be surprised by how many / be free to use"],
+      ["締め切りを忘れないように、課題が出た日に予定表に記入しています。", "so as not to forget / put it on my calendar / the day it is assigned"],
+      ["答えが合っていても、なぜその方法で解けるのかを説明できるとは限りません。", "even if the answer is correct / not necessarily be able to explain / why the method works"],
+      ["同じ話題について書かれた二つの記事を読むと、扱われている事実の違いが分かります。", "articles on the same topic / see how ... differ / the facts they cover"],
+      ["進路を決める前に、その分野で働いている人に一日の仕事について聞いてみたいです。", "before deciding on a career / someone who works in the field / a typical workday"],
+      ["時間が足りなければ、全問に答えようとせず、解けそうな問題から始めてください。", "if you are short on time / instead of trying to answer every question / start with"]
+    ],
+    advanced: [
+      ["何度も読み返して覚えたつもりになっても、何も見ずに説明しようとすると理解の穴が見えてきます。", "mistake repeated reading for mastery / explain without referring to anything / reveal gaps in understanding"],
+      ["同じ教材を使っても、何を確かめたいかが明確な生徒とそうでない生徒とでは、得られるものが違います。", "even with the same materials / have a clear idea of what to check / get something different out of"],
+      ["発表の評価に聞き手からの質問への対応も含めれば、原稿の暗記だけでは測れない力が見えてきます。", "include responses to audience questions in the assessment / reveal skills / memorizing a script"],
+      ["選択科目を早く決めさせる利点はあるものの、判断に必要な経験を得る前に選択肢を狭めるおそれもあります。", "although early selection has advantages / narrow students’ options / before gaining the experience needed"],
+      ["自分の答案のどこで論理が飛躍したのかを指摘されると、書いた本人には明らかだった前提に気づくことがあります。", "point out a leap in reasoning / become aware of an assumption / seem obvious to the writer"],
+      ["習熟度別に教える場合、初回の振り分け以上に、上達した生徒が別のクラスに移れる仕組みが重要です。", "group students by proficiency / more important than initial placement / move to another class as they improve"],
+      ["正解が一つに定まらない課題でも、結論をどの根拠から導いたかは評価できます。", "even for tasks with no single correct answer / assess / evidence on which a conclusion is based"],
+      ["教員がすぐに助言を与えず、生徒が何につまずいているのかを言葉にするまで待つ方が効果的なこともあります。", "hold back from giving immediate advice / put into words what they are struggling with / can be more effective"],
+      ["就職率だけを基準に学部を選ぶと、その数字に表れない学びの価値を見逃しかねません。", "choose a faculty solely on the basis of employment rates / miss the value / not captured by the figures"],
+      ["生徒同士で答案を読み合う活動は、評価の基準が具体的に示されてこそ効果を発揮します。", "peer review of written work / be effective only when / assessment criteria are made explicit"]
+    ]
+  },
+  {
+    id: "mobility", theme: "交通・旅行",
+    standard: [
+      ["雨が降り始めたとき、私たちは駅からまだ半分も歩いていませんでした。", "when it began to rain / had not yet walked halfway from the station"],
+      ["この切符があれば、今日中はどの駅で降りてもかまいません。", "with this ticket / get off at any station / for the rest of the day"],
+      ["バスが遅れたので、予約した時間までにホテルに着けるか心配でした。", "because the bus was late / wonder whether we could get to / in time for our reservation"],
+      ["坂を上りきると、左手に海が見えてきます。", "once you reach the top of the hill / come into view / on your left"],
+      ["早めに出発していたら、人が増える前に写真を撮れたでしょう。", "if we had left earlier / could have taken pictures / before it got crowded"],
+      ["乗り換えにどのくらい時間がかかるか、駅員に尋ねました。", "ask a station employee / how long it takes / change trains"],
+      ["大きな荷物は先にホテルに預けてから、街を歩いて回りましょう。", "leave our luggage at the hotel first / explore the city on foot"],
+      ["電車から降りるときに、座席に手袋を置き忘れたことに気づきました。", "as I was getting off the train / realize that / leave gloves on the seat"],
+      ["この道は少し遠回りですが、車が少ないので自転車でも走りやすいです。", "take you a little out of your way / have less traffic / easy to cycle along"],
+      ["駅前の案内所では、その日の夜に泊まれる宿を探すのを手伝ってもらえます。", "at the information desk / get help finding / somewhere to stay that night"]
+    ],
+    advanced: [
+      ["駅にエレベーターがあっても、入口まで段差のない経路が分からなければ、その情報だけでは十分ではありません。", "even if a station has an elevator / a step-free route / that information alone is insufficient"],
+      ["最も速い経路を案内するアプリが、初めて訪れる人にも最も分かりやすい経路を示すとは限りません。", "recommend the fastest route / not necessarily show / easiest for first-time visitors to follow"],
+      ["運行本数を増やすのが難しければ、乗り継ぎの待ち時間が短くなるよう時刻表を調整するという方法もあります。", "if increasing the frequency of services is difficult / coordinate timetables / shorten transfer waits"],
+      ["観光客が特定の場所に集中するのは、その場所が魅力的だからだけでなく、ほかの行き先について知る機会が少ないからでもあります。", "visitors concentrate in certain places / partly because / have little opportunity to learn about other destinations"],
+      ["交通量の調査では、車の数だけでなく、その道を横断できずに引き返した人にも目を向けるべきです。", "when studying traffic / pay attention to / turn back because they cannot cross"],
+      ["切符の購入をオンラインに限定した結果、窓口の混雑は減りましたが、現地で予定を変える旅行者には利用しづらくなりました。", "sell tickets online only / reduce queues at ticket counters / change plans while traveling"],
+      ["地図上では短い距離でも、荷物を持って移動する場合には、階段の数が経路の選択を大きく左右します。", "a short distance on a map / when traveling with luggage / strongly influence the choice of route"],
+      ["新しい路線によって通勤の選択肢が広がる一方で、既存の路線を利用してきた人の移動が不便になることもあります。", "while a new route broadens commuting options / make travel less convenient / rely on existing routes"],
+      ["自転車道の整備の効果は、全長だけでなく、途切れることなく目的地まで走れるかどうかで測るべきです。", "evaluate cycling infrastructure / not just by total length / ride all the way to a destination without gaps"],
+      ["旅先の習慣について事前に知っておくことで、自分には失礼に思える行為にも別の意味があると理解しやすくなります。", "learn about local customs in advance / what seems rude to you / may carry a different meaning"]
+    ]
+  },
+  {
+    id: "work_money", theme: "仕事・消費",
+    standard: [
+      ["欲しい靴が予算を超えていたので、買う前に一晩考えることにしました。", "cost more than I had budgeted / sleep on it before buying"],
+      ["この店では、レシートがあれば一週間以内に商品を交換できます。", "if you have the receipt / exchange an item within a week"],
+      ["アルバイトを始めてから、約束の時間より早く着くようになりました。", "since starting a part-time job / make a habit of arriving early"],
+      ["注文する前に、表示されている料金に送料が含まれているか確かめてください。", "before placing an order / check whether / the listed price includes shipping"],
+      ["一人では運べないほど箱が重かったので、同僚に手伝ってもらいました。", "too heavy to carry alone / ask a coworker to help"],
+      ["毎月何にお金を使ったかを記録すると、節約できるところが見つけやすくなります。", "keep track of what you spend money on / find ways to save"],
+      ["お客様に折り返し電話すると伝えたのに、電話番号を聞くのを忘れました。", "tell a customer I would call back / forget to ask for their number"],
+      ["店が閉まるまであと十分しかなかったので、必要なものだけを買いました。", "only ten minutes before the store closed / buy only what I needed"],
+      ["次の人がすぐに作業できるように、使った道具は元の場所に戻してください。", "so the next person can get to work right away / put the tools back where they belong"],
+      ["長く使えるかどうかを考えると、少し高い方を選ぶことにも理由があります。", "consider how long something will last / it can make sense to choose the slightly more expensive one"]
+    ],
+    advanced: [
+      ["価格の違いを正しく比べるには、購入時の費用に加えて、その後の維持費も見積もる必要があります。", "compare prices accurately / estimate ongoing maintenance costs / in addition to the purchase price"],
+      ["失敗を報告した人が責められる職場では、小さな問題が放置され、後で大きな損失につながることがあります。", "blame those who report mistakes / leave minor problems unaddressed / lead to substantial losses"],
+      ["売れた数を評価の唯一の基準にすると、顧客に合わない商品を勧める誘因が生まれかねません。", "use sales volume as the sole criterion / create an incentive to / recommend unsuitable products"],
+      ["一見割安な定額サービスでも、実際に使う頻度によっては、利用のたびに支払う方が安く済みます。", "an apparently inexpensive subscription / depending on how often you use it / pay per use"],
+      ["作業を引き継ぐときは、手順だけでなく、どのような場合にその手順を変えるべきかも伝えることが大切です。", "hand over a task / explain the procedure / under what circumstances it should be changed"],
+      ["値引きの期限が迫っていると、買わなければ損だと感じ、本当に必要かどうかを考えなくなることがあります。", "as a discount is about to expire / feel we are missing out / stop asking whether we really need it"],
+      ["仕事を速く終えた人に追加の仕事が集中すれば、効率を上げようとする意欲がかえって低下しかねません。", "assign extra work to those who finish quickly / have the unintended effect of / reducing motivation to work efficiently"],
+      ["業務の負担を把握するには、目に見える作業時間だけでなく、判断を任されることによる負担も考慮すべきです。", "understand the demands of a job / time spent on visible tasks / burden of being responsible for decisions"],
+      ["広告で節約できる額が強調されているときほど、割引前の価格が何を基準に定められたかを確認する価値があります。", "when an ad emphasizes how much you can save / check how the original price was determined"],
+      ["柔軟な働き方を認める制度があっても、利用すると昇進に不利になると思われていれば、利用は広がりにくいでしょう。", "allow flexible working arrangements / be seen as hurting promotion prospects / be unlikely to become widely used"]
+    ]
+  },
+  {
+    id: "arts_sports", theme: "芸術・スポーツ",
+    standard: [
+      ["試合に負けて初めて、自分がどれほどそのチームを大切に思っているか分かりました。", "only after losing the match / realize how much the team meant to me"],
+      ["映画が始まる前に、携帯電話の電源を切るようにアナウンスがありました。", "before the movie began / an announcement asking people to turn off their phones"],
+      ["あの選手が入ってから、チームは以前よりもよく声を掛け合うようになりました。", "since that player joined / communicate with one another more than before"],
+      ["美術館は混んでいましたが、その絵の前では立ち止まってゆっくり見ることができました。", "although the museum was crowded / stop in front of the painting / take time to look at it"],
+      ["本番では間違えましたが、練習を始めた頃より自信を持って演奏できました。", "make a mistake during the performance / play with more confidence / when I first started practicing"],
+      ["天候が悪くなれば、試合は来週の日曜日に延期されます。", "if the weather gets worse / be postponed until next Sunday"],
+      ["小説を読み終えてから映画を見ると、結末の描き方の違いがよく分かりました。", "after finishing the novel / see clearly how / the endings were presented differently"],
+      ["最初は一曲も弾けませんでしたが、今では友人と一緒に演奏できるようになりました。", "at first I could not play a single piece / now be able to play with friends"],
+      ["試合の動画を見せてもらうまで、サーブのときに足を動かしていることに気づきませんでした。", "not realize ... until / be shown a video of the match / move my feet while serving"],
+      ["私があの劇をもう一度見たいのは、最後の場面にまだ気になるところがあるからです。", "the reason I want to see the play again / something about the final scene / still wonder about"]
+    ],
+    advanced: [
+      ["勝敗だけでコーチを評価すると、選手が自分で判断する力をどれだけ伸ばしたかが見えにくくなります。", "evaluate coaches solely on wins and losses / make it hard to see / develop players’ ability to make decisions"],
+      ["作品について解説を読んだ後で見直すと、最初は偶然だと思った配置に意味があると気づくことがあります。", "look at a work again after reading about it / an arrangement that initially seemed accidental / turn out to be meaningful"],
+      ["体格に恵まれた選手が早い時期に結果を出しても、それだけで将来の伸びを予測できるわけではありません。", "physically advantaged athletes / achieve early success / cannot by itself predict future development"],
+      ["演奏会の録音なら細部を繰り返し確かめられますが、会場で聴くと、その場の静けさが音の聞こえ方を変えます。", "a recording allows you to revisit details / when listening in the hall / shape how the music sounds"],
+      ["選手の出来を数字で示すことはできますが、味方のために空間を作る動きは、その数字に表れにくいものです。", "quantify a player’s performance / movements that create space for teammates / be hard to capture in the numbers"],
+      ["古い作品を現代の言葉で上演することには、理解を助ける利点と、原文の響きを失うという代償があります。", "stage an older work in modern language / make it easier to understand / at the cost of losing the sound of the original"],
+      ["初心者が長くスポーツを続けられるかどうかは、上達の速さだけでなく、安心して参加できる仲間がいるかにも左右されます。", "whether beginners stay with a sport / depend not only on how quickly they improve / people they feel comfortable joining"],
+      ["芸術祭で入場者数の増加を目指すなら、初めて訪れた人が会場内で迷わないようにすることにも意味があります。", "aim to increase attendance at an arts festival / make it easier for first-time visitors / find their way around"],
+      ["負けた直後には気づけなかった改善点も、数日後に試合を振り返れば冷静に見つけられることがあります。", "areas for improvement you missed immediately after a defeat / review the match a few days later / identify with a clearer head"],
+      ["観客が物語をどう受け取るかは、舞台上で何を見せるかと同じくらい、何を観客の想像に委ねるかにも左右されます。", "how the audience interprets the story / depend as much on what is left to their imagination as on / what is shown onstage"]
+    ]
+  },
+  {
+    id: "language_media", theme: "言葉・メディア",
+    standard: [
+      ["その知らせを聞いたとき、何と言ってよいか分からず、しばらく黙っていました。", "when I heard the news / not know what to say / remain silent for a while"],
+      ["会議の場所が変わったことを、まだ誰にも伝えていないのですか。", "have you not told anyone yet / that the meeting venue has changed"],
+      ["聞き取れなかった箇所だけ、もう一度ゆっくり言ってもらえますか。", "could you repeat just the part / I did not catch / a little more slowly"],
+      ["悪い知らせを伝えるときは、相手が質問できる時間を取っておくようにしています。", "when breaking bad news / make sure to leave time / for the other person to ask questions"],
+      ["この記事には専門用語が多いので、まず見出しだけを読んで全体の流れをつかみました。", "contain many technical terms / read only the headings first / get a general sense of"],
+      ["手紙を書いているうちに、相手に一番伝えたいことが何か分かってきました。", "as I wrote the letter / come to realize / what I most wanted to tell the other person"],
+      ["駅の放送がよく聞こえなかったので、隣にいた人に何と言っていたか尋ねました。", "could not hear the announcement clearly / ask the person next to me / what it said"],
+      ["同じ単語でも、どの語と一緒に使うかによって意味が変わることがあります。", "the same word / change in meaning / depending on the words used with it"],
+      ["その写真がいつ撮られたものかを確かめてから、友人に送りました。", "check when the photo was taken / before sending it to a friend"],
+      ["短いメッセージだけでは誤解されそうだったので、電話で事情を説明しました。", "a short message might be misunderstood / explain the situation over the phone"]
+    ],
+    advanced: [
+      ["訳文を短くしようとして主語を省くと、誰の意見が紹介されているのか曖昧になることがあります。", "omit the subject to shorten a translation / make it unclear / whose opinion is being presented"],
+      ["見出しが事実を正しく伝えていても、何を取り上げなかったかによって読者が受ける印象は変わります。", "even if a headline accurately reports the facts / what it leaves out / shape readers’ impressions"],
+      ["同じ発言でも、途中の一文だけを切り取れば、話し手が全体として伝えようとした趣旨とは異なって聞こえます。", "quote only one sentence from the middle / sound different from / what the speaker meant to convey overall"],
+      ["翻訳の正確さを、原文の語がいくつ訳文に残っているかで判断すると、文章全体の働きを見失いがちです。", "judge a translation by how many original words are retained / tend to lose sight of / what the passage is doing as a whole"],
+      ["意見が急に広まったときは、支持者の多さだけでなく、何がきっかけで注目を集めたかを調べる必要があります。", "when an opinion spreads suddenly / not just how many people support it / what drew attention to it"],
+      ["話し手の意図を理解するには、使われた言葉に加えて、その場で何が当然とされていたかも知る必要があります。", "understand a speaker’s intentions / in addition to the words used / what was taken for granted"],
+      ["説明が平易であれば読む人は増えますが、例外について触れなければ、かえって誤った理解を広めることがあります。", "a clear, simple explanation reaches more readers / fail to mention exceptions / end up spreading a misunderstanding"],
+      ["映像に音楽を添えると、同じ出来事を見ていても、視聴者が緊張を感じる場面が変わることがあります。", "add music to footage / even when viewers see the same events / change which moments feel tense"],
+      ["議論の双方に同じ長さの発言時間を与えるだけでは、両者の主張が同じ程度に確かな根拠を持つと誤解されかねません。", "give both sides equal speaking time / risk creating the impression that / their claims are equally well supported"],
+      ["書き手が読者の疑問を先回りしてすべて説明すると、読者自身が考えて結論にたどり着く余地が狭まることがあります。", "anticipate and answer all the reader’s questions / leave less room for / reach a conclusion independently"]
     ]
   }
 ];

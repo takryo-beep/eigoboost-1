@@ -53,8 +53,8 @@
                 <span>高校・大学入試対策 | AI和文英訳・基礎英作文デイリートレーニング</span>
             </div>
             <div class="hidden md:flex items-center space-x-4 text-slate-300 text-[11px]">
-                <span>固定120問・2レベル</span>
-                <span class="text-step-yellow font-bold">12時間に1問の集中演習</span>
+                <span>固定220問・2レベル</span>
+                <span class="text-step-yellow font-bold">6時間に1問の集中演習</span>
             </div>
         </div>
     </div>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="flex-1 text-xs sm:text-sm">
                     <p class="font-extrabold text-amber-900 text-sm sm:text-base">今回の1問を完了しました</p>
-                    <p class="text-amber-800 mt-0.5 font-medium leading-relaxed">採点に成功してから12時間後に、次の1問に挑戦できます。待機中は復習ノートを活用しましょう。</p>
+                    <p class="text-amber-800 mt-0.5 font-medium leading-relaxed">採点に成功してから6時間後に、次の1問に挑戦できます。待機中は復習ノートを活用しましょう。</p>
                 </div>
             </div>
 
@@ -165,7 +165,7 @@
                 <div class="bg-gradient-to-r from-step-darkblue via-step-blue to-indigo-900 text-white p-5 sm:p-7 relative">
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                            <span id="questionProgress" class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm">各レベル60問・計120問</span>
+                            <span id="questionProgress" class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-bold backdrop-blur-sm">各レベル110問・計220問</span>
                             <span id="badgeLevel" class="bg-step-yellow text-slate-900 text-xs px-3 py-1 rounded-full font-extrabold">標準（英検2級・中堅大）</span>
                         </div>
                         <button onclick="speakJapaneseText()" title="日本語音声を再生" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
@@ -387,13 +387,13 @@
         </div>
     </footer>
 
-    <script src="questions.js?v=120-20261103"></script>
+    <script src="questions.js?v=220-20261120"></script>
     <script>
         /* ==========================================================================
            1. Application State & Storage
            ========================================================================== */
         const MAX_DAILY_ATTEMPTS = 1;
-        const COOLDOWN_MS = 12 * 60 * 60 * 1000;
+        const COOLDOWN_MS = 6 * 60 * 60 * 1000;
         let isSubmitting = false;
         let isGenerating = false;
 
@@ -410,7 +410,7 @@
             isRecording: false
         };
 
-        // 120問の固定問題集は questions.js から読み込みます。
+        // 220問の固定問題集は questions.js から読み込みます。
 
         /* ==========================================================================
            2. Initialization & Lifecycle
@@ -462,7 +462,7 @@
         }
 
         /* ==========================================================================
-           3. One successful attempt per 12 hours (same browser)
+           3. One successful attempt per 6 hours (same browser)
            ========================================================================== */
         function getTodayString() {
             const d = new Date();
@@ -476,6 +476,7 @@
             try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
         }
 
+        // 待ち時間の変更前に保存された採点結果と下書きを引き継ぐため、保存キーを維持します。
         function lastAttempt() {
             const record = readSaved('eigoboost_12h_attempt');
             return record && Number.isFinite(record.completedAt) ? record : null;
@@ -513,7 +514,7 @@
                 banner.querySelector('p:last-child').innerText = '次回は ' + next + ' から（あと' + Math.floor(minutes / 60) + '時間' + (minutes % 60) + '分）。復習ノートは引き続き利用できます。';
             }
             document.getElementById('btnSubmit').disabled = locked || isSubmitting || isGenerating;
-            document.getElementById('submitBtnText').innerText = locked ? '12時間後に再挑戦できます' : 'AI精密添削を受ける';
+            document.getElementById('submitBtnText').innerText = locked ? '6時間後に再挑戦できます' : 'AI精密添削を受ける';
             document.getElementById('userTranslation').disabled = locked || isSubmitting;
             document.getElementById('btnSpeech').disabled = locked || isSubmitting;
             document.getElementById('settingLevel').disabled = locked || isSubmitting || isGenerating;
@@ -650,7 +651,7 @@
         async function submitTranslationInternal() {
             loadDailyAttempts();
             if (appState.dailyAttempts >= MAX_DAILY_ATTEMPTS) {
-                showToast('今回の1問は完了しました。採点成功から12時間後に再挑戦できます。', 'alert');
+                showToast('今回の1問は完了しました。採点成功から6時間後に再挑戦できます。', 'alert');
                 return;
             }
 
